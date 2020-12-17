@@ -48,7 +48,7 @@ def main():
                 util.message("too much for you", constants.COLOR_ENEMY),
                 util.message("You should keep studying", constants.COLOR_ENEMY),
             ]
-            sleep(5)
+            sleep(10)
             game_running = False
 
         if enemy.get("kp") == 0:
