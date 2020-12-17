@@ -1,33 +1,29 @@
-import sys
-import os
+import constants
 
 
-def key_pressed():
-    try:
-        import tty, termios
-    except ImportError:
-        try:
-            # probably Windows
-            import msvcrt
-        except ImportError:
-            # FIXME what to do on other platforms?
-            raise ImportError('getch not available')
-        else:
-            key = msvcrt.getch().decode('utf-8')
-            return key
-    else:
-        fd = sys.stdin.fileno()
-        old_settings = termios.tcgetattr(fd)
-        try:
-            tty.setraw(fd)
-            ch = sys.stdin.read(1)
-        finally:
-            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-        return ch
+def select(board, wanted):
+    return [item for item in board if item.get("type") == wanted]
 
 
-def clear_screen():
-    if os.name == "nt":
-        os.system('cls')
-    else:
-        os.system('clear')
+def distance(points):
+    return (points[1][0] - points[0][0], points[1][1] - points[0][1])
+
+
+def message(text, color=constants.COLOR_PLAYER):
+    return {"text": text, "color": color}
+
+
+def start_msg():
+    return [
+        message("Have you got what it takes"),
+        message("to pass your PA?"),
+        message(""),
+    ]
+
+
+def end_msg():
+    return [
+        message(""),
+        message("Good luck!"),
+        message(""),
+    ]
