@@ -57,7 +57,7 @@ def main():
                 util.message("passed your PA!", constants.COLOR_ITEM),
                 util.message("Congratulations!", constants.COLOR_ITEM),
             ]
-            sleep(5)
+            sleep(10)
             game_running = False
 
         for event in tcod.event.wait():
